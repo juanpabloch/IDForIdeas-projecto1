@@ -1,0 +1,37 @@
+{
+  "name": "idforideasprojecto1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.10.0",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.15",
+    "sequelize": "^6.12.4",
+    "sequelize-cli": "^6.3.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.5.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-security": "^1.4.0"
+  },
+  "scripts": {
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juanpabloch/IDForIdeas-projecto1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/juanpabloch/IDForIdeas-projecto1/issues"
+  },
+  "homepage": "https://github.com/juanpabloch/IDForIdeas-projecto1#readme"
+}

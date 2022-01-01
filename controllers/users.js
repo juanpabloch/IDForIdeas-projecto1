@@ -48,10 +48,20 @@ const remove = async (req, res, next) => {
   }
 };
 
+const login = async (req, res, next) => {
+  try {
+    const response = await usersServices.login(req.body);
+    res.json(response);
+  } catch (e) {
+    next(e);
+  }
+};
+
 module.exports = {
   getAll,
   getById,
   remove,
   update,
-  create
+  create,
+  login
 };

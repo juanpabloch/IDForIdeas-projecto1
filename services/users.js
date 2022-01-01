@@ -1,4 +1,6 @@
 const usersRepository = require('../repositories/users');
+const bcrypt = require('../modules/bcrypt');
+const jwt = require('../modules/jwt');
 
 const getAll = async () => {
   const response = await usersRepository.getAll();
@@ -17,6 +19,7 @@ const getById = async (id) => {
 
 const create = async (body) => {
   const data = body;
+  data.password = bcrypt.hash(data.password);
   data.roleId = 2;
   const response = await usersRepository.create(data);
   return response;
@@ -45,10 +48,36 @@ const remove = async (id) => {
   }
 };
 
+const login = async (body) => {
+  const { email, password } = body;
+  const user = await usersRepository.getByEmail(email);
+  if (!user) {
+    const error = new Error('email or password not valid');
+    error.status = 404;
+    throw error;
+  }
+  const validPassword = bcrypt.unHash(password, user.password);
+  if (!validPassword) {
+    const error = new Error('email or password not valid');
+    error.status = 404;
+    throw error;
+  }
+
+  const JWTObject = {
+    email: user.email,
+    role: user.roleId
+  };
+
+  const JWT = jwt.createToken(JWTObject);
+
+  return { msg: 'welcome', JWT };
+};
+
 module.exports = {
   getAll,
   getById,
   remove,
   update,
-  create
+  create,
+  login
 };

@@ -3,8 +3,7 @@ const express = require('express');
 const router = express.Router();
 const controllers = require('../controllers/users');
 
-router.get('/', controllers.getAll);
-router.get('/:id', controllers.getById);
-router.delete('/:id', controllers.remove);
+router.post('/register', controllers.create);
+router.post('/login', controllers.login);
 
 module.exports = router;

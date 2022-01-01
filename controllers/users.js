@@ -41,8 +41,8 @@ const update = async (req, res, next) => {
 const remove = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const response = await usersServices.remove(id);
-    res.json(response);
+    await usersServices.remove(id);
+    res.json({ mgs: 'posts removed successfully' });
   } catch (e) {
     next(e);
   }

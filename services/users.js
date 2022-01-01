@@ -43,7 +43,6 @@ const remove = async (id) => {
     error.status = 404;
     throw error;
   }
-  return response;
 };
 
 module.exports = {

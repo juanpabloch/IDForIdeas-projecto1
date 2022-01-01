@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Posts.belongsToMany(models.Users, { through: 'PostUsers' });
     }
-  };
+  }
   Posts.init({
     title: DataTypes.STRING,
     description: DataTypes.TEXT,

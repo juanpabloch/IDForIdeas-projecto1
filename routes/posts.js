@@ -1,12 +1,13 @@
 const express = require('express');
+const controllers = require('../controllers/posts');
 
 const router = express.Router();
-const controllers = require('../controllers/posts');
 const auth = require('../middlewares/auth');
+const validators = require('../middlewares/posts');
 
 router.get('/', auth.isAuth, controllers.getAll);
 router.get('/:id', auth.isAdmin, controllers.getById);
-router.post('/', auth.isAdmin, controllers.create);
+router.post('/', [auth.isAdmin, validators.createValidation], controllers.create);
 router.patch('/:id', auth.isAdmin, controllers.update);
 router.delete('/:id', auth.isAdmin, controllers.remove);
 

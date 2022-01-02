@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const models = require('../models');
 
 const getAll = async () => {
@@ -8,6 +9,15 @@ const getAll = async () => {
 const getById = async (id) => {
   const response = await models.Posts.findOne({
     where: { id }
+  });
+  return response;
+};
+
+const getByTitle = async (title) => {
+  const response = await models.Posts.findOne({
+    where: {
+      title: { [Op.eq]: title }
+    }
   });
   return response;
 };
@@ -52,5 +62,6 @@ module.exports = {
   update,
   remove,
   addLike,
-  removeLike
+  removeLike,
+  getByTitle
 };

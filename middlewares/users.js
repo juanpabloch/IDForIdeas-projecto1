@@ -7,7 +7,7 @@ const email = check('email')
   .isEmail()
   .withMessage('invalid email')
   .custom((value) => {
-    const whiteSpaces = /[$%&|<># ]/g.test(value);
+    const whiteSpaces = /[$%&|<># '"]/g.test(value);
     if (whiteSpaces) {
       return reject('no spaces or symbols allowed');
     }
@@ -20,7 +20,7 @@ const password = check('password')
   .isLength({ min: 6 })
   .withMessage('Password must have more than 5 characters')
   .custom((value) => {
-    const whiteSpaces = /[$%&|<># ]/g.test(value);
+    const whiteSpaces = /[$%&|<># "']/g.test(value);
     if (whiteSpaces) {
       return reject('no spaces or symbols allowed');
     }

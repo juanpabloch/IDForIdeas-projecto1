@@ -16,6 +16,12 @@ const getById = async (id) => {
 };
 
 const create = async (body) => {
+  const title = await postsRepository.getByTitle(body.title);
+  if (title) {
+    const error = new Error('title already exists');
+    error.status = 400;
+    throw error;
+  }
   const response = await postsRepository.create(body);
   return response;
 };

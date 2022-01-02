@@ -14,7 +14,17 @@ const getByName = async (name) => {
   return response;
 };
 
+const getById = async (id) => {
+  const response = await models.Roles.findOne({
+    where: {
+      id
+    }
+  });
+  return response;
+};
+
 module.exports = {
   getAll,
-  getByName
+  getByName,
+  getById
 };

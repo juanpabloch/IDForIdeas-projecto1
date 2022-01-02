@@ -5,10 +5,6 @@ const usersRoutes = require('./users');
 const postsRoutes = require('./posts');
 const authRoutes = require('./auth');
 
-router.get('/', (req, res) => {
-  res.json({ msg: 'welcome' });
-});
-
 router.use('/users', usersRoutes);
 router.use('/posts', postsRoutes);
 router.use('/auth', authRoutes);

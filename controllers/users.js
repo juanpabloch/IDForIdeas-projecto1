@@ -42,7 +42,7 @@ const remove = async (req, res, next) => {
   try {
     const { id } = req.params;
     await usersServices.remove(id);
-    res.json({ mgs: 'posts removed successfully' });
+    res.json({ mgs: 'User deleted successfully' });
   } catch (e) {
     next(e);
   }

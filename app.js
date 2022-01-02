@@ -13,7 +13,7 @@ app.use(express.urlencoded());
 app.use(express.json());
 app.use(cors());
 
-app.use('/', routes);
+app.use('/api', routes);
 
 app.use((req, res) => {
   res.status(404).json({ error: 'page not found' });

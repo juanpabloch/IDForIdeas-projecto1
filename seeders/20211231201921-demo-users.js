@@ -14,14 +14,14 @@ module.exports = {
     await queryInterface.bulkInsert('Users', [
       {
         email: 'juanpablo@mail.com',
-        password: '123456',
+        password: '$2b$10$FJY.ajLw3LkkmBCvsnYteeSfHvJ1NmQWBXs40ydDGQ7.yoHApx3ia',
         roleId: 1,
         createdAt: new Date,
         updatedAt: new Date
       },
       {
         email: 'marian@mail.com',
-        password: '123456',
+        password: '$2b$10$FJY.ajLw3LkkmBCvsnYteeSfHvJ1NmQWBXs40ydDGQ7.yoHApx3ia',
         roleId: 2
       }
     ], {});

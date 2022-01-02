@@ -64,7 +64,7 @@ const login = async (body) => {
   }
 
   const JWTObject = {
-    email: user.email,
+    id: user.id,
     role: user.roleId
   };
 

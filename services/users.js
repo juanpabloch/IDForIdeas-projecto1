@@ -19,6 +19,12 @@ const getById = async (id) => {
 
 const create = async (body) => {
   const data = body;
+  const email = await usersRepository.getByEmail(data.email);
+  if (email) {
+    const error = new Error('email already exist');
+    error.status = 400;
+    throw error;
+  }
   data.password = bcrypt.hash(data.password);
   data.roleId = 2;
   const response = await usersRepository.create(data);

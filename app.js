@@ -8,6 +8,7 @@ const routes = require('./routes');
 const app = express();
 const port = process.env.PORT || 3000;
 
+// app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(express.urlencoded());
 app.use(express.json());

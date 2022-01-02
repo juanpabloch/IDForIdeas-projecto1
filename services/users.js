@@ -1,6 +1,7 @@
 const usersRepository = require('../repositories/users');
 const bcrypt = require('../modules/bcrypt');
 const jwt = require('../modules/jwt');
+const mailer = require('../modules/mailer');
 
 const getAll = async () => {
   const response = await usersRepository.getAll();
@@ -28,6 +29,13 @@ const create = async (body) => {
   data.password = bcrypt.hash(data.password);
   data.roleId = 2;
   const response = await usersRepository.create(data);
+  const mailOptions = {
+    from: 'juanpablochoter@gmail.com',
+    to: data.email,
+    subject: 'welcome to your fashion app',
+    text: `hola ${body.email.split('@')[0]}`
+  };
+  mailer.sendEmail(mailOptions);
   return response;
 };
 

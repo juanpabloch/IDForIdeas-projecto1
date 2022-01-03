@@ -22,8 +22,8 @@ const getByTitle = async (title) => {
   return response;
 };
 
-const create = async (body) => {
-  const response = await models.Posts.create(body);
+const create = async (newPost) => {
+  const response = await models.Posts.create(newPost);
   return response;
 };
 

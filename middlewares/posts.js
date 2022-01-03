@@ -14,17 +14,10 @@ const title = check('title')
   });
 
 const image = check('image')
-  .notEmpty()
-  .withMessage('title require')
-  .custom((value) => {
-    const whiteSpaces = /[$%&|<># '"]/g.test(value);
-    if (whiteSpaces) {
-      return reject('no spaces or symbols allowed');
-    }
-    return true;
-  })
-  .custom((value) => {
-    const ext = (path.extname(value).toLowerCase());
+  .custom((value, { req }) => {
+    const file = req.files.image;
+    const ext = (path.extname(file.name).toLowerCase());
+    console.log(ext);
     const validsExt = [
       '.jpg',
       '.jpeg',

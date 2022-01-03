@@ -15,14 +15,20 @@ const getById = async (id) => {
   return response;
 };
 
-const create = async (body) => {
+const create = async (image, body) => {
   const title = await postsRepository.getByTitle(body.title);
   if (title) {
     const error = new Error('title already exists');
     error.status = 400;
     throw error;
   }
-  const response = await postsRepository.create(body);
+
+  const newPost = {
+    ...body,
+    image: image.firebaseURL
+  }
+
+  const response = await postsRepository.create(newPost);
   return response;
 };
 

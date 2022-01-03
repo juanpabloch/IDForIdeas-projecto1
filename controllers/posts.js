@@ -21,7 +21,7 @@ const getById = async (req, res, next) => {
 
 const create = async (req, res, next) => {
   try {
-    const response = await postsServices.create(req.body);
+    const response = await postsServices.create(req.files.image, req.body);
     res.json(response);
   } catch (e) {
     next(e);

@@ -6,6 +6,7 @@ const auth = require('../middlewares/auth');
 
 router.get('/', auth.isAdmin, controllers.getAll);
 router.get('/:id', auth.isAdmin, controllers.getById);
+router.get('/me/:id', auth.isOwnUser, controllers.getById);
 router.delete('/:id', auth.isOwnUser, controllers.remove);
 
 router.patch('/:id/posts/:postId/', auth.isOwnUser, controllers.addPost);

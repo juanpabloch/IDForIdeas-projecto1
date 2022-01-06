@@ -12,8 +12,4 @@ router.post('/', [auth.isAdmin, validators.createValidation, firebase.uploadImag
 router.patch('/:id', auth.isAdmin, controllers.update);
 router.delete('/:id', auth.isAdmin, controllers.remove);
 
-// ver como conectar
-router.patch('/:id/like', controllers.addLike);
-router.patch('/:id/dislike', controllers.removeLike);
-
 module.exports = router;

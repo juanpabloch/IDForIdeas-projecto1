@@ -8,6 +8,6 @@ router.get('/', auth.isAdmin, controllers.getAll);
 router.get('/:id', auth.isAdmin, controllers.getById);
 router.delete('/:id', auth.isOwnUser, controllers.remove);
 
-router.patch('/:userId/posts/:postId/', controllers.addPost);
+router.patch('/:id/posts/:postId/', auth.isOwnUser, controllers.addPost);
 
 module.exports = router;

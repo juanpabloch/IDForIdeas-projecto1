@@ -59,9 +59,9 @@ const login = async (req, res, next) => {
 
 const addPost = async (req, res, next) => {
   try {
-    const { userId, postId } = req.params;
+    const { id, postId } = req.params;
     const { option } = req.query;
-    const response = await usersServices.addPost(userId, postId, option);
+    const response = await usersServices.addPost(id, postId, option);
     res.json(response);
   } catch (e) {
     console.log(e);

@@ -1,4 +1,7 @@
 const usersRepository = require('../repositories/users');
+const postRepository = require('../repositories/posts');
+const postServices = require('./posts');
+const postUsersRepository = require('../repositories/postUsers');
 const bcrypt = require('../modules/bcrypt');
 const jwt = require('../modules/jwt');
 const mailer = require('../modules/mailer');
@@ -87,11 +90,62 @@ const login = async (body) => {
   return { msg: 'welcome', JWT };
 };
 
+const addPost = async (userId, postId, option) => {
+  const user = await usersRepository.getById(userId);
+  // hacer un middleware con las verificaciones
+  if (!user) {
+    const error = new Error('user not exist');
+    error.status = 404;
+    throw error;
+  }
+  const post = await postRepository.getById(postId);
+  if (!post) {
+    const error = new Error('post not exist');
+    error.status = 404;
+    throw error;
+  }
+
+  if (!option) {
+    const error = new Error('option query require');
+    error.status = 404;
+    throw error;
+  }
+
+  if (!['like', 'dislike'].includes(option)) {
+    const error = new Error('option invalid option');
+    error.status = 404;
+    throw error;
+  }
+
+  const userElection = await postUsersRepository.getOne(userId, postId);
+
+  if (userElection.length === 0) {
+    const data = {
+      UserId: user.id,
+      PostId: post.id,
+      option
+    };
+    await postUsersRepository.insert(data);
+    await postServices.addLikeDislike(post.id, option);
+    return option;
+  }
+
+  if (option !== userElection[0].option) {
+    console.log('opcion: ', option, 'opcion en base de datos: ', userElection[0].option);
+    const updateOption = { option };
+    await postUsersRepository.update(user.id, post.id, updateOption);
+    await postServices.updateLikes(post.id, option);
+  }
+
+  return option;
+};
+
 module.exports = {
   getAll,
   getById,
   remove,
   update,
   create,
-  login
+  login,
+  addPost
 };

@@ -52,31 +52,31 @@ const remove = async (id) => {
   }
 };
 
-const addLike = async (id) => {
+const addLikeDislike = async (id, option) => {
   const post = await postsRepository.getById(id);
-  if (!post) {
-    const error = new Error('post no exist');
-    error.status = 404;
-    throw error;
+  if (option === 'like') {
+    post.likes += 1;
+  }else{
+    post.dislikes += 1;
   }
-  post.likes += 1;
   post.save();
-  const response = await postsRepository.addLike(id, post);
+  const response = await postsRepository.updateLikeDislike(id, post);
   return response;
-};
+}
 
-const removeLike = async (id) => {
+const updateLikes = async (id, option) => {
   const post = await postsRepository.getById(id);
-  if (!post) {
-    const error = new Error('post no exist');
-    error.status = 404;
-    throw error;
+  if (option === 'like') {
+    post.likes += 1;
+    post.dislikes -= 1
+  }else{
+    post.dislikes += 1;
+    post.likes -= 1;
   }
-  post.dislikes += 1;
   post.save();
-  const response = await postsRepository.removeLike(id, post);
+  const response = await postsRepository.updateLikeDislike(id, post);
   return response;
-};
+}
 
 module.exports = {
   getAll,
@@ -84,6 +84,6 @@ module.exports = {
   create,
   update,
   remove,
-  addLike,
-  removeLike
+  addLikeDislike,
+  updateLikes
 };

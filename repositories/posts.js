@@ -41,14 +41,7 @@ const remove = async (id) => {
   return response;
 };
 
-const addLike = async (id, body) => {
-  const response = await models.Posts.update(body, {
-    where: { id }
-  });
-  return response;
-};
-
-const removeLike = async (id, body) => {
+const updateLikeDislike = async (id, body) => {
   const response = await models.Posts.update(body, {
     where: { id }
   });
@@ -61,7 +54,6 @@ module.exports = {
   create,
   update,
   remove,
-  addLike,
-  removeLike,
+  updateLikeDislike,
   getByTitle
 };

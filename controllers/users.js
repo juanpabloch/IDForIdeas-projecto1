@@ -57,11 +57,24 @@ const login = async (req, res, next) => {
   }
 };
 
+const addPost = async (req, res, next) => {
+  try {
+    const { userId, postId } = req.params;
+    const { option } = req.query;
+    const response = await usersServices.addPost(userId, postId, option);
+    res.json(response);
+  } catch (e) {
+    console.log(e);
+    next(e);
+  }
+};
+
 module.exports = {
   getAll,
   getById,
   remove,
   update,
   create,
-  login
+  login,
+  addPost
 };

@@ -9,7 +9,7 @@ const getAll = async () => {
 
 const getById = async (id) => {
   const response = await models.Users.findOne({
-    where: { id }
+    where: { id },
   });
   return response;
 };

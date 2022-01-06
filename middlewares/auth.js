@@ -32,6 +32,9 @@ const isAuth = async (req, res, next) => {
       error.status = 401;
       throw error;
     }
+
+    const token = authorization.split(' ')[1];
+    jwt.decodeToken(token);
     next();
   } catch (e) {
     res.status(401).json({ Error: e.message });

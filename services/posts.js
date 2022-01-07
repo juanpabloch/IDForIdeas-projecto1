@@ -1,8 +1,23 @@
 const postsRepository = require('../repositories/posts');
 
-const getAll = async () => {
-  const response = await postsRepository.getAll();
-  return response;
+limit = 5;
+
+const getAll = async (page) => {
+  const postsCount = await postsRepository.getCount();
+  const pages = Math.ceil(postsCount / limit);
+  if (page > pages) {
+    const error = new Error('invalid page');
+    error.status = 404;
+    throw error;
+  }
+
+  const response = await postsRepository.getAll(limit, page);
+
+  const responseBody = {
+    totalPages: pages,
+    data: response
+  }
+  return responseBody;
 };
 
 const getById = async (id) => {

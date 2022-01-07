@@ -2,7 +2,8 @@ const postsServices = require('../services/posts');
 
 const getAll = async (req, res, next) => {
   try {
-    const response = await postsServices.getAll();
+    const page = parseInt(req.query.page) || 1;
+    const response = await postsServices.getAll(page);
     res.json(response);
   } catch (e) {
     next(e);

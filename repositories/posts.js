@@ -1,8 +1,20 @@
 const { Op } = require('sequelize');
 const models = require('../models');
 
-const getAll = async () => {
-  const response = await models.Posts.findAll();
+const getAll = async (limit, page) => {
+  const response = await models.Posts.findAll({
+    order: [
+      ['createdAt', 'DESC']
+    ],
+    limit,
+    offset: (page - 1) * limit
+  });
+
+  return response;
+};
+
+const getCount = async () => {
+  const response = await models.Posts.count();
   return response;
 };
 
@@ -55,5 +67,6 @@ module.exports = {
   update,
   remove,
   updateLikeDislike,
-  getByTitle
+  getByTitle,
+  getCount
 };
